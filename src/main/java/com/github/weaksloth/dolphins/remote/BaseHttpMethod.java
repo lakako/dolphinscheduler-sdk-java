@@ -39,7 +39,7 @@ public enum BaseHttpMethod {
     }
   };
 
-  private String name;
+  private final String name;
 
   BaseHttpMethod(String name) {
     this.name = name;
@@ -62,7 +62,7 @@ public enum BaseHttpMethod {
   public static BaseHttpMethod of(String name) {
     if (!Strings.isNullOrEmpty(name)) {
       for (BaseHttpMethod method : BaseHttpMethod.values()) {
-        if (name.toLowerCase().equals(method.name.toLowerCase())) {
+        if (name.equalsIgnoreCase(method.name)) {
           return method;
         }
       }

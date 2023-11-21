@@ -14,7 +14,7 @@ public class Header {
 
   private static final Header EMPTY = Header.newInstance();
 
-  private Map<String, String> header;
+  private final Map<String, String> header;
 
   private Header() {
     header = new LinkedHashMap<>();
@@ -68,9 +68,6 @@ public class Header {
   private String analysisCharset(String contentType) {
     String[] values = contentType.split(";");
     String charset = StandardCharsets.UTF_8.displayName();
-    if (values.length == 0) {
-      return charset;
-    }
     for (String value : values) {
       if (value.startsWith("charset=")) {
         charset = value.substring("charset=".length());

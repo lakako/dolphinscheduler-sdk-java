@@ -194,14 +194,8 @@ public class DolphinsRestTemplate {
 
     ResponseHandler<T> responseHandler = new ResponseHandler<>();
     responseHandler.setResponseType(responseType);
-    HttpClientResponse response = null;
-    try {
-      response = this.requestClient.execute(uri, httpMethod, requestEntity);
-      return responseHandler.handle(response);
-    } finally {
-      if (response != null) {
-        response.close();
+      try (HttpClientResponse response = this.requestClient.execute(uri, httpMethod, requestEntity)) {
+          return responseHandler.handle(response);
       }
-    }
   }
 }
