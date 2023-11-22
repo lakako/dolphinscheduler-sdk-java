@@ -1,40 +1,41 @@
 package com.github.weaksloth.dolphins.remote;
 
 import com.google.common.base.Strings;
-import org.apache.http.client.methods.*;
+import org.apache.hc.client5.http.classic.methods.*;
+import org.apache.hc.core5.http.message.BasicClassicHttpRequest;
 
 public enum BaseHttpMethod {
   GET(HttpMethod.GET) {
     @Override
-    protected HttpRequestBase createRequest(String url) {
+    protected BasicClassicHttpRequest createRequest(String url) {
       return new HttpGet(url);
     }
   },
 
   POST(HttpMethod.POST) {
     @Override
-    protected HttpRequestBase createRequest(String url) {
+    protected BasicClassicHttpRequest createRequest(String url) {
       return new HttpPost(url);
     }
   },
 
   PUT(HttpMethod.PUT) {
     @Override
-    protected HttpRequestBase createRequest(String url) {
+    protected BasicClassicHttpRequest createRequest(String url) {
       return new HttpPut(url);
     }
   },
 
   PATCH(HttpMethod.PATCH) {
     @Override
-    protected HttpRequestBase createRequest(String url) {
+    protected BasicClassicHttpRequest createRequest(String url) {
       return new HttpPatch(url);
     }
   },
 
   DELETE(HttpMethod.DELETE) {
     @Override
-    protected HttpRequestBase createRequest(String url) {
+    protected BasicClassicHttpRequest createRequest(String url) {
       return new HttpDelete(url);
     }
   };
@@ -45,11 +46,11 @@ public enum BaseHttpMethod {
     this.name = name;
   }
 
-  public HttpRequestBase init(String url) {
+  public BasicClassicHttpRequest init(String url) {
     return createRequest(url);
   }
 
-  protected HttpRequestBase createRequest(String url) {
+  protected BasicClassicHttpRequest createRequest(String url) {
     throw new UnsupportedOperationException();
   }
 

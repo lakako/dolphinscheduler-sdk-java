@@ -2,9 +2,8 @@ package com.github.weaksloth.dolphins.remote;
 
 import com.github.weaksloth.dolphins.remote.request.DefaultHttpClientRequest;
 import com.google.common.base.Strings;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.protocol.RequestContent;
+import org.apache.hc.client5.http.config.RequestConfig;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
 
 /** the factory to create http client(rest template) */
 public class HttpClientFactory {
@@ -44,10 +43,9 @@ public class HttpClientFactory {
     return new DolphinsRestTemplate(
         new DefaultHttpClientRequest(
             HttpClients.custom()
-                .addInterceptorLast(new RequestContent(true))
+//                .addInterceptorLast(new RequestContent(true))
                 .setDefaultRequestConfig(defaultConfig)
-                .build(),
-            defaultConfig));
+                .build()));
   }
 
   // TODO
