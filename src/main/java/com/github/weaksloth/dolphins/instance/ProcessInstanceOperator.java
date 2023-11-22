@@ -30,15 +30,15 @@ public class ProcessInstanceOperator extends AbstractOperator {
    * @param processInstanceCreateParam process instance create param
    * @return true for success,otherwise false
    */
-  public Boolean start(Long projectCode, ProcessInstanceCreateParam processInstanceCreateParam) {
+  public Long start(Long projectCode, ProcessInstanceCreateParam processInstanceCreateParam) {
     String url = dolphinAddress + "/projects/" + projectCode + "/executors/start-process-instance";
     log.info("start process instance ,url:{}", url);
     try {
-      HttpRestResult<JsonNode> restResult =
+      HttpRestResult<Long> restResult =
           dolphinsRestTemplate.postForm(
-              url, getHeader(), processInstanceCreateParam, JsonNode.class);
+              url, getHeader(), processInstanceCreateParam, Long.class);
       log.info("start process response:{}", restResult);
-      return restResult.getSuccess();
+      return restResult.getData();
     } catch (Exception e) {
       throw new DolphinException("start dolphin scheduler process instance fail", e);
     }
