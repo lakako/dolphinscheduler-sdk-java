@@ -15,6 +15,9 @@ public class DolphinClientConstant {
     public static final String RE_RUN = "REPEAT_RUNNING";
     public static final String STOP = "STOP";
     public static final String PAUSE = "PAUSE";
+    public static final String RESUME = "RECOVER_SUSPENDED_PROCESS";
+    public static final String START_FAILURE = "START_FAILURE_TASK_PROCESS";
+    public static final String EXECUTE = "EXECUTE_TASK";
   }
 
   public static class HttpTask {

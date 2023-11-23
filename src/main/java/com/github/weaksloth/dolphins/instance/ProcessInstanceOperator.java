@@ -30,15 +30,14 @@ public class ProcessInstanceOperator extends AbstractOperator {
    * @param processInstanceCreateParam process instance create param
    * @return true for success,otherwise false
    */
-  public Boolean start(Long projectCode, ProcessInstanceCreateParam processInstanceCreateParam) {
+  public Long start(Long projectCode, ProcessInstanceCreateParam processInstanceCreateParam) {
     String url = dolphinAddress + "/projects/" + projectCode + "/executors/start-process-instance";
     log.info("start process instance ,url:{}", url);
     try {
-      HttpRestResult<JsonNode> restResult =
-          dolphinsRestTemplate.postForm(
-              url, getHeader(), processInstanceCreateParam, JsonNode.class);
+      HttpRestResult<Long> restResult =
+          dolphinsRestTemplate.postForm(url, getHeader(), processInstanceCreateParam, Long.class);
       log.info("start process response:{}", restResult);
-      return restResult.getSuccess();
+      return restResult.getData();
     } catch (Exception e) {
       throw new DolphinException("start dolphin scheduler process instance fail", e);
     }
@@ -88,6 +87,17 @@ public class ProcessInstanceOperator extends AbstractOperator {
   public Boolean reRun(Long projectCode, Long processInstanceId) {
     log.info("repeat run workflow instance,id:{}", processInstanceId);
     return execute(projectCode, processInstanceId, DolphinClientConstant.ExecuteType.RE_RUN);
+  }
+  /**
+   * continue dolphin scheduler workflow instance
+   *
+   * @param projectCode project code
+   * @param processInstanceId process instance id
+   * @return true for success,otherwise false
+   */
+  public Boolean resume(Long projectCode, Long processInstanceId) {
+    log.info("continue workflow instance,id:{}", processInstanceId);
+    return execute(projectCode, processInstanceId, DolphinClientConstant.ExecuteType.RESUME);
   }
 
   /**
