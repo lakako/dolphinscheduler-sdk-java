@@ -30,7 +30,7 @@ public class ProcessInstanceTest extends BaseTest {
         .setStartParams("")
         .setExpectedParallelismNumber("")
         .setDryRun(0);
-    Assert.assertTrue(getClient().opsForProcessInst().start(projectCode, startParam));
+    Assert.assertNotNull(getClient().opsForProcessInst().start(projectCode, startParam));
   }
 
   @Test
